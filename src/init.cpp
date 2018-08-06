@@ -15,6 +15,7 @@
 #include <blockfilter.h>
 #include <chain.h>
 #include <chainparams.h>
+#include <claimtrie.h>
 #include <compat/sanity.h>
 #include <consensus/validation.h>
 #include <fs.h>
@@ -260,6 +261,8 @@ void Shutdown(InitInterfaces& interfaces)
             g_chainstate->ResetCoinsViews();
         }
         pblocktree.reset();
+        delete pclaimTrie;
+        pclaimTrie = nullptr;
     }
     for (const auto& client : interfaces.chain_clients) {
         client->stop();
@@ -553,8 +556,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/bitcoin/bitcoin>";
-    const std::string URL_WEBSITE = "<https://bitcoincore.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/lbryio/lbrycrd>";
+    const std::string URL_WEBSITE = "<https://lbry.com>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -1251,9 +1254,9 @@ bool AppInitMain(InitInterfaces& interfaces)
     // Warn about relative -datadir path.
     if (gArgs.IsArgSet("-datadir") && !fs::path(gArgs.GetArg("-datadir", "")).is_absolute()) {
         LogPrintf("Warning: relative datadir option '%s' specified, which will be interpreted relative to the " /* Continued */
-                  "current working directory '%s'. This is fragile, because if bitcoin is started in the future "
+                  "current working directory '%s'. This is fragile, because if lbrycrd is started in the future "
                   "from a different location, it will be unable to locate the current data files. There could "
-                  "also be data loss if bitcoin is started while in a temporary directory.\n",
+                  "also be data loss if lbrycrd is started while in a temporary directory.\n",
             gArgs.GetArg("-datadir", ""), fs::current_path().string());
     }
 
@@ -1448,6 +1451,7 @@ bool AppInitMain(InitInterfaces& interfaces)
     nCoinDBCache = std::min(nCoinDBCache, nMaxCoinsDBCache << 20); // cap total coins db cache
     nTotalCache -= nCoinDBCache;
     nCoinCacheUsage = nTotalCache; // the rest goes to in-memory cache
+    std::cout << "nTotalCache: " << nTotalCache << ", nCoinCacheUsage: " << nCoinCacheUsage << ", nCoinDBCache: " << nCoinDBCache << std::endl;
     int64_t nMempoolSizeMax = gArgs.GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
     LogPrintf("Cache configuration:\n");
     LogPrintf("* Using %.1f MiB for block index database\n", nBlockTreeDBCache * (1.0 / 1024 / 1024));
@@ -1481,6 +1485,8 @@ bool AppInitMain(InitInterfaces& interfaces)
                 // fails if it's still open from the previous loop. Close it first:
                 pblocktree.reset();
                 pblocktree.reset(new CBlockTreeDB(nBlockTreeDBCache, false, fReset));
+                delete pclaimTrie;
+                pclaimTrie = new CClaimTrie(false, fReindex);
 
                 if (fReset) {
                     pblocktree->WriteReindexing(true);
@@ -1521,6 +1527,12 @@ bool AppInitMain(InitInterfaces& interfaces)
                 // This is called again in ThreadImport after the reindex completes.
                 if (!fReindex && !LoadGenesisBlock(chainparams)) {
                     strLoadError = _("Error initializing block database").translated;
+                    break;
+                }
+
+                if (!pclaimTrie->ReadFromDisk(true))
+                {
+                    strLoadError = _("Error loading the claim trie from disk");
                     break;
                 }
 
@@ -1747,6 +1759,9 @@ bool AppInitMain(InitInterfaces& interfaces)
         chain_active_height = ::ChainActive().Height();
     }
     LogPrintf("nBestHeight = %d\n", chain_active_height);
+
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+    pclaimTrie->setExpirationTime(consensusParams.GetExpirationTime(chain_active_height));
 
     if (gArgs.GetBoolArg("-listenonion", DEFAULT_LISTEN_ONION))
         StartTorControl();
