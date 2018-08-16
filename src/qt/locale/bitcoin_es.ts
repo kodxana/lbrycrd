@@ -3675,11 +3675,7 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
     </message>
     <message>
         <source>The specified config file %s does not exist
-</source>
         <translation>El fichero de configuración %s especificado no existe
-</translation>
-    </message>
-    <message>
         <source>The transaction amount is too small to pay the fee</source>
         <translation>El monto a transferir es muy pequeño para pagar el impuesto</translation>
     </message>
