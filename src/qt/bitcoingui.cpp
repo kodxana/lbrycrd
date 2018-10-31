@@ -771,6 +771,12 @@ void BitcoinGUI::macosDockIconActivated()
     show();
     activateWindow();
 }
+#else
+void BitcoinGUI::macosDockIconActivated()
+{
+    show();
+    activateWindow();
+}
 #endif
 
 void BitcoinGUI::optionsClicked()
