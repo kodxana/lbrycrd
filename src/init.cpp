@@ -1530,12 +1530,6 @@ bool AppInitMain(InitInterfaces& interfaces)
                     break;
                 }
 
-                if (!pclaimTrie->ReadFromDisk(true))
-                {
-                    strLoadError = _("Error loading the claim trie from disk");
-                    break;
-                }
-
                 // At this point we're either in reindex or we've loaded a useful
                 // block tree into BlockIndex()!
 
@@ -1582,6 +1576,13 @@ bool AppInitMain(InitInterfaces& interfaces)
                 strLoadError = _("Error opening block database").translated;
                 break;
             }
+
+                CClaimTrieCache trieCache(pclaimTrie);
+                if (!trieCache.ReadFromDisk(chainActive.Tip()))
+                {
+                    strLoadError = _("Error loading the claim trie from disk");
+                    break;
+                }
 
             if (!fReset) {
                 // Note that RewindBlockIndex MUST run even if we're about to -reindex-chainstate.
@@ -1761,7 +1762,7 @@ bool AppInitMain(InitInterfaces& interfaces)
     LogPrintf("nBestHeight = %d\n", chain_active_height);
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    pclaimTrie->setExpirationTime(consensusParams.GetExpirationTime(chain_active_height));
+    CClaimTrieCache(pclaimTrie).setExpirationTime(consensusParams.GetExpirationTime(chain_active_height));
 
     if (gArgs.GetBoolArg("-listenonion", DEFAULT_LISTEN_ONION))
         StartTorControl();
