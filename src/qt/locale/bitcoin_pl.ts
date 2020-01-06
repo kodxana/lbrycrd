@@ -3682,7 +3682,11 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     </message>
     <message>
         <source>The specified config file %s does not exist
+</source>
         <translation>Podany plik konfiguracyjny %s nie istnieje
+</translation>
+    </message>
+    <message>
         <source>The transaction amount is too small to pay the fee</source>
         <translation>Zbyt niska kwota transakcji by zapłacić opłatę</translation>
     </message>

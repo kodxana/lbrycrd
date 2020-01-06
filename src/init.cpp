@@ -52,7 +52,9 @@
 #include <ui_interface.h>
 #include <util/moneystr.h>
 #include <util/system.h>
+#include <util/strencodings.h>
 #include <util/threadnames.h>
+#include <util/translation.h>
 #include <util/validation.h>
 #include <validation.h>
 #include <validationinterface.h>
@@ -279,7 +281,6 @@ void Shutdown(InitInterfaces& interfaces)
         LogPrintf("%s: Unable to remove PID file: %s\n", __func__, fsbridge::get_filesystem_error_message(e));
     }
     interfaces.chain_clients.clear();
-    g_wallet_init_interface.Close();
     UnregisterAllValidationInterfaces();
     GetMainSignals().UnregisterBackgroundSignalScheduler();
     GetMainSignals().UnregisterWithMempoolSignals(mempool);
@@ -1207,7 +1208,6 @@ bool AppInitMain(InitInterfaces& interfaces)
         // Detailed error printed inside CreatePidFile().
         return false;
     }
-    }
     if (!LogInstance().StartLogging()) {
             return InitError(strprintf("Could not open debug log file %s",
                 LogInstance().m_file_path.string()));
@@ -1499,7 +1499,7 @@ bool AppInitMain(InitInterfaces& interfaces)
                 // From here on out fReindex and fReset mean something different!
                 if (!LoadBlockIndex(chainparams)) {
                     if (ShutdownRequested()) break;
-                    strLoadError = _("Error loading block index database");
+                    strLoadError = _("Error loading block index database").translated;
                     break;
                 }
 
@@ -1540,8 +1540,8 @@ bool AppInitMain(InitInterfaces& interfaces)
                         "", CClientUIInterface::MSG_ERROR);
                 });
 
-                if (g_logger->Enabled() && LogAcceptCategory(BCLog::CLAIMS))
-                    CLogPrint::global().setLogger(g_logger);
+                if (LogInstance().Enabled() && LogAcceptCategory(BCLog::CLAIMS))
+                    CLogPrint::global().setLogger(&LogInstance());
 
                 delete pclaimTrie;
                 auto& consensus = chainparams.GetConsensus();
@@ -1582,9 +1582,9 @@ bool AppInitMain(InitInterfaces& interfaces)
                 break;
             }
 
-                auto tip = chainActive.Tip();
+                auto tip = ::ChainActive().Tip();
                 if (tip && !CClaimTrieCache(pclaimTrie).validateDb(tip->nHeight, tip->hashClaimTrie)) {
-                    strLoadError = _("Error validating the claim trie from disk");
+                    strLoadError = _("Error validating the claim trie from disk").translated;
                     break;
                 }
 
