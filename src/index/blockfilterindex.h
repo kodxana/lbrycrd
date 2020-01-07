@@ -7,8 +7,7 @@
 
 #include <blockfilter.h>
 #include <chain.h>
-#include <flatfile.h>
-#include <index/base.h>
+#include <sqlite.h>
 
 /**
  * BlockFilterIndex is used to store and retrieve block filters, hashes, and headers for a range of
@@ -17,31 +16,11 @@
  *
  * This index is used to serve BIP 157 net requests.
  */
-class BlockFilterIndex final : public BaseIndex
+class BlockFilterIndex
 {
-private:
     BlockFilterType m_filter_type;
-    std::string m_name;
-    std::unique_ptr<BaseIndex::DB> m_db;
-
-    FlatFilePos m_next_filter_pos;
-    std::unique_ptr<FlatFileSeq> m_filter_fileseq;
-
-    bool ReadFilterFromDisk(const FlatFilePos& pos, BlockFilter& filter) const;
-    size_t WriteFilterToDisk(FlatFilePos& pos, const BlockFilter& filter);
-
-protected:
-    bool Init() override;
-
-    bool CommitInternal() override;
-
-    bool WriteBlock(const CBlock& block, const CBlockIndex* pindex) override;
-
-    bool Rewind(const CBlockIndex* current_tip, const CBlockIndex* new_tip) override;
-
-    BaseIndex::DB& GetDB() const override { return *m_db; }
-
-    const char* GetName() const override { return m_name.c_str(); }
+    std::string m_filter_name;
+    mutable sqlite::database db;
 
 public:
     /** Constructs the index, which becomes available to be queried. */
