@@ -86,12 +86,12 @@
     <message>
         <location line="+7"/>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your LBRY Credits addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your LBRY Credits addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -456,7 +456,7 @@
     <message>
         <location line="-880"/>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Send coins to a Bitcoin address</translation>
+        <translation>Send coins to a LBRY Credits address</translation>
     </message>
     <message>
         <location line="+67"/>
@@ -486,7 +486,7 @@
     <message>
         <location line="+570"/>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>LBRY Credits</translation>
     </message>
     <message>
         <location line="-792"/>
@@ -521,12 +521,12 @@
     <message>
         <location line="+7"/>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Sign messages with your Bitcoin addresses to prove you own them</translation>
+        <translation>Sign messages with your LBRY Credits addresses to prove you own them</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verify messages to ensure they were signed with specified Bitcoin addresses</translation>
+        <translation>Verify messages to ensure they were signed with specified LBRY Credits addresses</translation>
     </message>
     <message>
         <location line="+58"/>
@@ -551,7 +551,7 @@
     <message>
         <location line="-158"/>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Request payments (generates QR codes and LBRY Credits: URIs)</translation>
     </message>
     <message>
         <location line="+70"/>
@@ -577,8 +577,8 @@
         <location line="+410"/>
         <source>%n active connection(s) to Bitcoin network</source>
         <translation>
-            <numerusform>%n active connection to Bitcoin network</numerusform>
-            <numerusform>%n active connections to Bitcoin network</numerusform>
+            <numerusform>%n active connection to LBRY network</numerusform>
+            <numerusform>%n active connections to LBRY network</numerusform>
         </translation>
     </message>
     <message>
@@ -637,7 +637,7 @@
     <message>
         <location line="-494"/>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished"></translation>
+        <translation>Show the %1 help message to get a list with possible LBRYcrd Core command-line options</translation>
     </message>
     <message>
         <location line="+253"/>
@@ -723,7 +723,7 @@
     <message>
         <location filename="../bitcoin.cpp" line="+529"/>
         <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation type="unfinished"></translation>
+        <translation>A fatal error occurred. LBRYcrd Core can no longer continue safely and will quit.</translation>
     </message>
 </context>
 <context>
@@ -1081,7 +1081,7 @@
     <message>
         <location filename="../intro.cpp" line="+20"/>
         <source>Bitcoin</source>
-        <translation type="unfinished">Bitcoin</translation>
+        <translation type="unfinished">LBRYcrd Core</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -1096,7 +1096,7 @@
     <message>
         <location line="+8"/>
         <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 will download and store a copy of the LBRY block chain.</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1139,12 +1139,12 @@
     </message>
     <message>
         <location line="+119"/>
-        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the LBRY network, as detailed below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend LBRY Credits that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1450,7 +1450,7 @@
     </message>
     <message>
         <location line="+25"/>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <source>Connect to the LBRY network through a separate SOCKS5 proxy for Tor hidden services.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1712,7 +1712,7 @@
     <message>
         <location line="+8"/>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation>URI cannot be parsed! This can be caused by an invalid LBRY Credits address or malformed URI parameters.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1844,7 +1844,7 @@
     <message>
         <location filename="../guiutil.cpp" line="+115"/>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter a LBRY Credits address</translation>
     </message>
     <message>
         <location line="+686"/>
@@ -2460,7 +2460,7 @@
         <location line="-3"/>
         <location line="+46"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the LBRY network.</translation>
     </message>
     <message>
         <location line="-30"/>
@@ -3061,7 +3061,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     <message>
         <location line="+39"/>
         <source>The Bitcoin address to send the payment to</source>
-        <translation type="unfinished"></translation>
+        <translation>The LBRY Credits address to send the payment to</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -3123,7 +3123,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     <message>
         <location line="+54"/>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation>A message that was attached to the lbry credits: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the LBRY network.</translation>
     </message>
     <message>
         <location line="+448"/>
@@ -3227,7 +3227,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     <message>
         <location line="+21"/>
         <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Sign the message to prove you own this Bitcoin address</translation>
+        <translation>Sign the message to prove you own this LBRY Credits address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3258,12 +3258,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     <message>
         <location line="+21"/>
         <source>The Bitcoin address the message was signed with</source>
-        <translation type="unfinished"></translation>
+        <translation>The LBRY Credits address the message was signed with</translation>
     </message>
     <message>
         <location line="+37"/>
         <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verify the message to ensure it was signed with the specified Bitcoin address</translation>
+        <translation>Verify the message to ensure it was signed with the specified LBRY Credits address</translation>
     </message>
     <message>
         <location line="+3"/>
