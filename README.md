@@ -29,7 +29,10 @@ Please read the [lbry.tech overview](https://lbry.tech/overview) for a general u
 
 ## Installation
 
-Latest binaries are available from https://github.com/lbryio/lbrycrd/releases. There is no installation procedure; the CLI binaries will run as-is and will have any uncommon dependencies statically linked into the binary. The QT GUI is not supported. LBRYcrd is distributed as a collection of executable files; traditional installers are not provided.
+Latest binaries are available from https://github.com/lbryio/lbrycrd/releases. There is no installation procedure; the CLI binaries will run as-is and will have any uncommon dependencies statically linked into the binary. The QT GUI is supported by downloading separate binary. LBRYcrd is distributed as a collection of executable files; traditional installers are not provided.
+
+## Running GUI
+To start LBRYcrd Core download lbrycrd-qt.exe for Windows and duble click on it, or lbrycrd-qt-linux for linux and in terminal run ./lbrycrd-qt 
 
 ## Usage
 
