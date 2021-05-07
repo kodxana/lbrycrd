@@ -122,6 +122,7 @@ BITCOIN_CORE_H = \
   fs.h \
   httprpc.h \
   httpserver.h \
+  i2p.h \
   indirectmap.h \
   init.h \
   interfaces/handler.h \
@@ -187,6 +188,7 @@ BITCOIN_CORE_H = \
   uint256.h \
   undo.h \
   util.h \
+  util/readwritefile.h \
   utilmemory.h \
   utilmoneystr.h \
   utilstrencodings.h \
@@ -233,6 +235,7 @@ libbitcoin_server_a_SOURCES = \
   consensus/tx_verify.cpp \
   httprpc.cpp \
   httpserver.cpp \
+  i2p.cpp \
   init.cpp \
   lbry.cpp \
   merkleblock.cpp \
@@ -260,6 +263,7 @@ libbitcoin_server_a_SOURCES = \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \
+  util/readwritefile.cpp \
   txmempool.cpp \
   ui_interface.cpp \
   uint256.cpp \
